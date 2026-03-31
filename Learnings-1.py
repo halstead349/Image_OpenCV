@@ -107,7 +107,7 @@ step. It changes the position and shape but maintains the overall structure, oft
 # cv.imshow("IMAGE",rgb)
 
 #----------------------------color channels : splitting the colors and displaying-----------------------
-b,g,r= cv.split(img)
+#b,g,r= cv.split(img)
 # cv.imshow("blue",b)
 # cv.imshow("green",g)
 # cv.imshow("red",r)
@@ -128,8 +128,70 @@ b,g,r= cv.split(img)
 # blurr is applied to a middle pixel in a kernel which affect the surrounding pixels in that kernel window.
 
 # Average : the cumputation of the middle concentrated pixel is the average of the intersity of the neighbor pixels.
-average = cv.blur(img,(3,3))
-cv.imshow("blurr",average)
-cv.imshow("OG",img)
+# average = cv.blur(img,(3,3))
+# cv.imshow("blurr",average)
+# cv.imshow("OG",img)
+
+# # Gaussian blur : little lesser blurring than average blurring.
+# gauss = cv.GaussianBlur(img,(7,7),0)
+# cv.imshow("Gauss",gauss)
+
+# # median blur:
+# median = cv.medianBlur(img,7)
+# cv.imshow("Median",median) 
+
+# # Bilateral blurring : retains the edges of the image even after applying blurr.
+# bilateral = cv.bilateralFilter(img,5,15,15)
+# cv.imshow("Bilateral",bilateral)
+
+# -------------------------BITWISE OPERATORS---------------------------
+
+#blank = np.zeros((400,400),dtype='uint8')
+# rectangle = cv.rectangle(blank.copy(),(30,30),(370,370),255,-1)
+# circle = cv.circle(blank.copy(),(200,200),200,255,-1)
+
+# AND: Returns intersection of two images.
+# bit_and = cv.bitwise_and(rectangle,circle)
+# cv.imshow("AND",bit_and)
+
+# OR : returns both intersecting and non-intersecting areas as image.
+# bit_or = cv.bitwise_or(rectangle,circle)
+# cv.imshow("OR",bit_or)
+
+# XOR : return non-intersecting regions
+# bit_xor = cv.bitwise_xor(rectangle,circle)
+# cv.imshow("XOR",bit_xor)
+
+# NOT : inverts the image or contrast the image.
+# bit_not = cv.bitwise_not(circle)
+# cv.imshow("not",bit_not)
+
+# ----------- MASKING : Focuses on specific region of an image.--------------------------------
+# blank = np.zeros(img.shape[:2],dtype='uint8')
+# mask = cv.circle(blank,(img.shape[1]//2,img.shape[0]//2),100,255,-1) # we can also use rectangle or any other shapes as per out combo for masking.
+
+# masked = cv.bitwise_and(img,img,mask=mask)
+# cv.imshow("MASKED",masked)
+
+# ------------------HISTOGRAMS: allows us to visualize the pixel intensity of the pixel distribution in an image.
+# import matplotlib.
+
+
+# ------------------------Thresholding an image---------------------
+# Converting an inage to binary image.(1,0 or 255 )
+gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
+cv.imshow("GRAY",gray)
+
+# simple thresholding:
+# threshold , thresh = cv.threshold(gray,150,255,cv.THRESH_BINARY)
+# cv.imshow("SIMPLE_THRESH",thresh)
+
+# threshold, thresh_inv = cv.threshold(gray,150,255,cv.THRESH_BINARY_INV) # Inversion of the binary image.
+# cv.imshow("INV_Thershold",thresh_inv)
+
+# Adaptive Thresholding : lets the computer decide the threshold values.
+adaptive_thresh = cv.adaptiveThreshold(gray,255,cv.ADAPTIVE_THRESH_MEAN_C,cv.THRESH_BINARY,11,3)
+cv.imshow("adaptive_thresh",adaptive_thresh)
+
 
 cv.waitKey(0)
