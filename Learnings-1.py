@@ -178,7 +178,7 @@ step. It changes the position and shape but maintains the overall structure, oft
 
 
 # ------------------------Thresholding an image---------------------
-# Converting an inage to binary image.(1,0 or 255 )
+# Converting an image to binary image.(1,0 or 255 )
 gray = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
 cv.imshow("GRAY",gray)
 
@@ -190,8 +190,31 @@ cv.imshow("GRAY",gray)
 # cv.imshow("INV_Thershold",thresh_inv)
 
 # Adaptive Thresholding : lets the computer decide the threshold values.
-adaptive_thresh = cv.adaptiveThreshold(gray,255,cv.ADAPTIVE_THRESH_MEAN_C,cv.THRESH_BINARY,11,3)
-cv.imshow("adaptive_thresh",adaptive_thresh)
+# adaptive_thresh = cv.adaptiveThreshold(gray,255,cv.ADAPTIVE_THRESH_MEAN_C,cv.THRESH_BINARY,11,3)
+# cv.imshow("adaptive_thresh",adaptive_thresh)
+
+#Gradients : Gradients measure change strength/direction, while edge detection uses these measurements to create a binary map of object boundaries. 
+# Laplacian method: 
+#convert first the image in gray.
+# lap = cv.Laplacian(gray,cv.CV_64F)
+# lap = np.uint8(np.absolute(lap))
+# cv.imshow("laplacian",lap)
+
+# sobel gradient detection. : focuses on grandients along side the axis directions be it x or y.
+
+# sobelx = cv.Sobel(gray,cv.CV_64F,1,0)
+# sobely = cv.Sobel(gray,cv.CV_64F,0,1)
+# combined_sobel = cv.bitwise_or(sobelx,sobely)
+# cv.imshow("SobelX",sobelx)
+# cv.imshow("sobely", sobely)
+# cv.imshow("Combined",combined_sobel)
+
+#Canny edge detection :
+# can = cv.Canny(gray,150,175)
+# cv.imshow("Canny", can)
+
+
+
 
 
 cv.waitKey(0)
